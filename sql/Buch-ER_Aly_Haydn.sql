@@ -1,0 +1,31 @@
+CREATE TABLE Autor (
+ Autoren ID INT NOT NULL,
+ Name VARCHAR(25),
+ Geburtsdatum DATE
+);
+
+ALTER TABLE Autor ADD CONSTRAINT PK_Autor PRIMARY KEY (Autoren ID);
+
+
+CREATE TABLE Verlag (
+ ID INT NOT NULL,
+ Verlagsname VARCHAR(30)
+);
+
+ALTER TABLE Verlag ADD CONSTRAINT PK_Verlag PRIMARY KEY (ID);
+
+
+CREATE TABLE Buch (
+ Internationale Standard Buchnummer VARCHAR(20) NOT NULL,
+ Buchtitel VARCHAR(30),
+ Autoren ID INT NOT NULL,
+ Verlags ID INT
+);
+
+ALTER TABLE Buch ADD CONSTRAINT PK_Buch PRIMARY KEY (Internationale Standard Buchnummer);
+
+
+ALTER TABLE Buch ADD CONSTRAINT FK_Buch_0 FOREIGN KEY (Autoren ID) REFERENCES Autor (Autoren ID);
+ALTER TABLE Buch ADD CONSTRAINT FK_Buch_1 FOREIGN KEY (Verlags ID) REFERENCES Verlag (ID);
+
+
