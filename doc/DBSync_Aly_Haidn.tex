@@ -127,4 +127,27 @@ right  = 2.00cm]{geometry}
 	\newpage
 	\section{Middleware}
 	\section{Arbeitsdurchführung}
+	Für das Mappen auf die jeweiligen Datenbanken soll auf propel zurückgegriffen werden, ein Tool das letztes Jahr im Zuge einer Übung zum objektrelationalen Mapping verwendet wurde.\\
+	Der Vorteil der sich daraus ergibt liegt darin, dass die PHP-Klassen für das Mappen in die Datenbanken automatisch aus einem XML-Schema generiert werden und so nur noch die Synchronisation dazwischen implementiert werden muss.\\
+	\\
+	Da die Installation von Propel über den Peer-PHP-Installer um einiges zügiger geht, wird dieser vorher installiert.
+	
+	\subsection{Peer Installation}
+	Unter Linux kann Peer einfach mit dem folgenden Befehl installiert werden:
+	\begin{lstlisting}
+		apt-get install php5-xsl php-pear
+	\end{lstlisting}
+	Da für manche Anwendungsfälle Phing benötigt wird macht es Sinn, auch Dies noch zu installieren:
+	\begin{lstlisting}
+		sudo pear channel-discover pear.phing.info
+		sudo pear install phing/phing
+	\end{lstlisting}
+	\subsection{Propel Installation}
+	Sind die vorherigen Punkte geglückt, kann nun Propel installiert werden:
+	\begin{lstlisting}
+		pear channel-discover pear.propelorm.org
+		pear install -a propel/propel_generator
+	\end{lstlisting}
+	Da für das Generieren der PHP-Klassen der Generator ausreicht, ignorieren wir die Propel-Runtime.
+	
 \end{document}
