@@ -81,15 +81,15 @@ right  = 2.00cm]{geometry}
 	
 	\newpage
 	\section{Datenbankentwurf}
+	\subsection{ERD DB1}
 	Bei dem Entwurf der Datenbank wurde auf ein simples Beispiel, bestehend aus drei Tabellen, zurückgegriffen.\\
 	Es handelt sich um ein Buch, dass von einem bestimmtem Autor verfasst wurde, von dem eine eindeutige ID, der Name und das Geburtsdatum bekannt ist.\\
 	Jedes Buch wird von einem Verlag verlegt, der ebenfalls über eine eindeutige ID und einem Namen besitzt.
-	\subsection{ERD}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{img/buch-erd.png}
 	\end{center}
 	
-	\subsection{Create-Script}
+	\subsubsection{Create-Script}
 	Das Create-Script wurde über das Export-Tool von Astah an Hand des ER-Diagramms erstellt.\\
 	\begin{tiny}
 		\begin{lstlisting}
@@ -118,9 +118,45 @@ right  = 2.00cm]{geometry}
 		);
 		
 		ALTER TABLE Buch ADD CONSTRAINT PK_Buch PRIMARY KEY (Internationale Standard Buchnummer);
+		
+		
 		ALTER TABLE Buch ADD CONSTRAINT FK_Buch_0 FOREIGN KEY (Autoren ID) REFERENCES Autor (Autoren ID);
 		ALTER TABLE Buch ADD CONSTRAINT FK_Buch_1 FOREIGN KEY (Verlags ID) REFERENCES Verlag (ID);
+		\end{lstlisting}
+	\end{tiny}
+	
+	\newpage
+	\subsection{ERD DB2}
+	Ähnlich wie bei der ersten Datenbank, enthält die Zweite, Tabellen über das Halten von Informationen von Büchern, allerdings besitzt der Verlag keine eigene Identität mehr.
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{img/werk-erd.png}
+	\end{center}
+	
+	\subsubsection{Create-Script}
+	Das Create-Script wurde über das Export-Tool von Astah and Hand des ER-Diagrammes erstellt.
+	\begin{tiny}
+		\begin{lstlisting}
+		CREATE TABLE Autor (
+		id INT NOT NULL,
+		GebDat DATE,
+		Beschreibung CHAR(10)
+		);
 		
+		ALTER TABLE Autor ADD CONSTRAINT PK_Autor PRIMARY KEY (id);
+		
+		
+		CREATE TABLE Werk (
+		name VARCHAR(50) NOT NULL,
+		id INT NOT NULL,
+		release DATE,
+		verlag VARCHAR(50),
+		SSID CHAR(10)
+		);
+		
+		ALTER TABLE Werk ADD CONSTRAINT PK_Werk PRIMARY KEY (name,id);
+		
+		
+		ALTER TABLE Werk ADD CONSTRAINT FK_Werk_0 FOREIGN KEY (id) REFERENCES Autor (id);
 		\end{lstlisting}
 	\end{tiny}
 	
