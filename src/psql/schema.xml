@@ -24,7 +24,7 @@
     <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
     <column name="gebdat" phpName="GebDat" type="varchar" size="50" required="true" />
     <column name="beschreibung" phpName="Beschreibung" type="varchar" required="false" />
-    <colimn name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
+    <column name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
   </table>
 
   <!-- Sync-Table werk -->
@@ -33,7 +33,7 @@
     <column name="autor_id" phpName="Autor_ID" type="integer" />
     <column name="isbn" phpName="ISBN" type="varchar" size="24" required="true" />
     <column name="release" phpName="ReleaseDate" type="date" required="true" />
-    <colimn name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
+    <column name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
 
     <foreign-key foreignTable="autor" phpName="Autor">
       <reference local="autor_id" foreign="id"/>
