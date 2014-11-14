@@ -32,12 +32,14 @@
     <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
     <column name="name" phpName="Name" type="varchar" size="50" required="true" />
     <column name="gebdat" phpName="GebDat" type="date" required="true" />
+    <colimn name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
   </table>
 
   <!-- Sync-Table verlag -->
   <table name="verlag_changes" phpName="Verlag_Changes">
     <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
     <column name="name" phpName="Name" type="varchar" size="50" required="true" />
+    <colimn name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
   </table>
 
   <!-- Sync-Table buch -->
@@ -46,6 +48,7 @@
     <column name="titel" phpName="Titel" type="varchar" size="50" required="true" />
     <column name="autor_id" phpName="Autor_ID" type="integer" />
     <column name="verlag_id" phpName="Verlag_ID" type="integer" />
+    <colimn name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
 
     <foreign-key foreignTable="autor" phpName="Autor">
       <reference local="autor_id" foreign="id"/>
