@@ -18,4 +18,24 @@
     </foreign-key>
   </table>
 
+  <!-- Tabllen fuer die Synchronisation -->
+  <!-- Sync-Table autor -->
+  <table name="autor_changes" phpName="Autor_Changes">
+    <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="gebdat" phpName="GebDat" type="varchar" size="50" required="true" />
+    <column name="beschreibung" phpName="Beschreibung" type="varchar" required="false" />
+  </table>
+
+  <!-- Sync-Table werk -->
+  <table name="werk_changes" phpName="Werk_Changes">
+    <column name="name" phpName="Name" type="varchar" required="true" primaryKey="true" />
+    <column name="autor_id" phpName="Autor_ID" type="integer" />
+    <column name="isbn" phpName="ISBN" type="varchar" size="24" required="true" />
+    <column name="release" phpName="ReleaseDate" type="date" required="true" />
+
+    <foreign-key foreignTable="autor" phpName="Autor">
+      <reference local="autor_id" foreign="id"/>
+    </foreign-key>
+  </table>
+
 </database>
