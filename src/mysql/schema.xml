@@ -24,6 +24,35 @@
     <foreign-key foreignTable="verlag" phpName="Verlag">
       <reference local="verlag_id" foreign="id"/>
     </foreign-key>
-
   </table>
+
+  <!-- Tabllen fuer die Synchronisation -->
+  <!-- Sync-Table autor -->
+  <table name="autor_changes" phpName="Autor_Changes">
+    <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="name" phpName="Name" type="varchar" size="50" required="true" />
+    <column name="gebdat" phpName="GebDat" type="date" required="true" />
+  </table>
+
+  <!-- Sync-Table verlag -->
+  <table name="verlag_changes" phpName="Verlag_Changes">
+    <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="name" phpName="Name" type="varchar" size="50" required="true" />
+  </table>
+
+  <!-- Sync-Table buch -->
+  <table name="buch_changes" phpName="Buch_Changes">
+    <column name="isbn" phpName="ISBN" type="varchar" size="24" required="true" primaryKey="true" />
+    <column name="titel" phpName="Titel" type="varchar" size="50" required="true" />
+    <column name="autor_id" phpName="Autor_ID" type="integer" />
+    <column name="verlag_id" phpName="Verlag_ID" type="integer" />
+
+    <foreign-key foreignTable="autor" phpName="Autor">
+      <reference local="autor_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="verlag" phpName="Verlag">
+      <reference local="verlag_id" foreign="id"/>
+    </foreign-key>
+  </table>
+
 </database>
