@@ -33,7 +33,7 @@
     <column name="name" phpName="Name" type="varchar" size="50" required="true" />
     <column name="gebdat" phpName="GebDat" type="date" required="true" />
     <column name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
-    <column name="action" phpName="action" type="varchar" size="3" required="true" />
+    <column name="action" phpName="Action" type="varchar" size="3" sqlType="enum('INSERT', 'UPDATE', 'DELETE')" required="true" />
   </table>
 
   <!-- Sync-Table verlag -->
@@ -41,7 +41,7 @@
     <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
     <column name="name" phpName="Name" type="varchar" size="50" required="true" />
     <column name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
-    <column name="action" phpName="action" type="varchar" size="3" required="true" />
+    <column name="action" phpName="Action" type="varchar" size="3" sqlType="enum('INSERT', 'UPDATE', 'DELETE')" required="true" />
   </table>
 
   <!-- Sync-Table buch -->
@@ -51,7 +51,7 @@
     <column name="autor_id" phpName="Autor_ID" type="integer" />
     <column name="verlag_id" phpName="Verlag_ID" type="integer" />
     <column name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
-    <column name="action" phpName="action" type="varchar" size="3" required="true" />
+    <column name="action" phpName="Action" type="varchar" size="3" sqlType="enum('INSERT', 'UPDATE', 'DELETE')" required="true" />
 
     <foreign-key foreignTable="autor" phpName="Autor">
       <reference local="autor_id" foreign="id"/>

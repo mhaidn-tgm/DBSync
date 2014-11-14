@@ -25,7 +25,7 @@
     <column name="gebdat" phpName="GebDat" type="varchar" size="50" required="true" />
     <column name="beschreibung" phpName="Beschreibung" type="varchar" required="false" />
     <column name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
-    <column name="action" phpName="Action" type="varchar" size="3" required="true" />
+    <column name="action" phpName="Action" type="varchar" size="3" sqlType="enum('INSERT', 'UPDATE', 'DELETE')" required="true" />
   </table>
 
   <!-- Sync-Table werk -->
@@ -35,7 +35,7 @@
     <column name="isbn" phpName="ISBN" type="varchar" size="24" required="true" />
     <column name="release" phpName="ReleaseDate" type="date" required="true" />
     <column name="time_stamp" phpName="Time_Stamp" type="date" required="true" />
-    <column name="action" phpName="Action" type="varchar" size="3" required="true" />
+    <column name="action" phpName="Action" type="varchar" size="3" sqlType="enum('INSERT', 'UPDATE', 'DELETE')" required="true" />
 
     <foreign-key foreignTable="autor" phpName="Autor">
       <reference local="autor_id" foreign="id"/>
