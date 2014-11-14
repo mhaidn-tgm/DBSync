@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="Werk" defaultIdMethod="native">
+
+  <table name="autor" phpName="Autor">
+    <column name="id" phpName="ID" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="gebdat" phpName="GebDat" type="varchar" size="50" required="true" />
+    <column name="beschreibung" phpName="Beschreibung" type="varchar" required="false" />
+  </table>
+
+  <table name="werk" phpName="Werk">
+    <column name="name" phpName="Name" type="varchar" required="true" primaryKey="true" />
+    <column name="autor_id" phpName="Autor_ID" type="integer" />
+    <column name="isbn" phpName="ISBN" type="varchar" size="24" required="true" />
+    <column name="release" phpName="ReleaseDate" type="date" required="true" />
+
+    <foreign-key foreignTable="autor" phpName="Autor">
+      <reference local="autor_id" foreign="id"/>
+    </foreign-key>
+  </table>
+
+</database>
