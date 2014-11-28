@@ -6,6 +6,7 @@
 \usepackage{fancyhdr} %Package to configure headings and footer
 \usepackage{lastpage} %Needed to display last page (total amount of pages)
 \usepackage{listings}
+\usepackage{color}
 
 % pagelayout
 \usepackage[
@@ -73,10 +74,18 @@ right  = 2.00cm]{geometry}
 	
 	\newpage
 	\section{Aufwandsschätzung}
+	\subsection{Schätzung im Vorfeld}
 	Für die Durchführung dieser Übung sind elf Stunden vorgesehen.
 	Die Aufgabenstellung wurde in Arbeitsparkete untergliedert und für die jeweiligen Tasks wurde eine Zeitaufwandsschätzung erstellt.\\
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{img/timetable.png}
+		\\
+	\end{center}
+	\subsection{Tatsächlich benötigt}
+	Wie sich in der tatsächlich benötigten Zeit ablesen lässt, ist bei der Vorbereitung schon um einiges mehr Zeit vergangen als erwartet. Grund dafür war das ewige trouble shooting bezüglich der Propel installation und pear.
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{img/timetable2.png}
+		\\
 	\end{center}
 	
 	\newpage
@@ -184,6 +193,39 @@ right  = 2.00cm]{geometry}
 		pear channel-discover pear.propelorm.org
 		pear install -a propel/propel_generator
 	\end{lstlisting}
-	Da für das Generieren der PHP-Klassen der Generator ausreicht, ignorieren wir die Propel-Runtime.
+	Da für das Generieren der PHP-Klassen der Generator ausreicht, ignorieren wir die Propel-Runtime.\\
+	\\
+	\textcolor{red}{Bei der Installation von Propel sind leider einige Probleme aufgetreten, die Zeit und Nerven kosteten. Es empfiehlt sich \underline{nicht} den Peer-Installer zu verwenden, sondern Propel über den Package-Manager zu Installieren, bzw. die Sources handisch zu laden.}
+	
+	\newpage
+	\subsection{Generieren der PHP-Klassen}
+	Propel bietet die Funktion die PHP-Klassen für das Mapping in die Datenbanken an Hand eines XML-Shemas zu generieren.\\
+	Für diesen Zweck wurden für beide Seiten ein XML-Shema erstellt. Zusätzlich wurde zu jeder Tabelle eine Synchronisationstabelle erstellt, die neben dem Datensätzen ein Enum der Änderung beinhalten.\\
+	(INSERT, UPDATE, DELETE)\\
+	\\
+	\textbf{MySql}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{img/mySql-Shema.png}
+		\\
+	\end{center}
+	
+	\textbf{Postgres}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{img/postgres-Shema.png}
+		\\
+	\end{center}
+	Mit dem Befehl "\textit{propel gen}" können die PHP-Klassen, unter der Verwendung des XML-Shemas, das auf der gleichen Ebene liegen muss, erstellt werden. Diese können nun im Unterverzeichnis "\textbf{build}" gefunden werden.
+	
+	\newpage
+	\subsection{Umsetzen der Middleware}
+	Um die beiden Datenbanken synchronisieren zu können, wurden auf alle Tabellen drei Trigger gesetzt, die jeweils entweder auf einen Insert, Update, oder Delete warten.\\
+	Werden diese Trigger ausgelöst, so wird abhängig von der Änderung der neue Satz in die Synchronisationstabelle geschrieben.\\
+	Die Middleware selektiert in einem definierten, möglichst kurzem, Zeitintervall die Synchronisationstabellen der Datenbanken und bringt so beide Seiten wieder auf den gleichen Stand.\\
+	Nach der Synchronisation werden die Datensätze aus den Syc-Tabellen wieder entfernt.\\
+	\\
+	\textbf{Trigger definition}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{img/trigger.png}
+	\end{center}
 	
 \end{document}
